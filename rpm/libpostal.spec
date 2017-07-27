@@ -1,9 +1,9 @@
-Summary:  A C library for parsing/normalizing street addresses around the world. Powered by statistical NLP and open geo data
+Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
 Version: 0.3.4
 Release: 1%{?dist}
 License: MIT
-Group: Libraries/Databases
+Group: Development/Libraries
 URL: https://github.com/openvenues/libpostal
 
 Source: %{name}-%{version}.tar.gz
