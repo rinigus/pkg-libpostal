@@ -38,7 +38,7 @@ CXXFLAGS="$CXXFLAGS -fPIC"
 CONFEXTRA=""
 
 %ifarch armv7hl
-CONFEXTRA="--with-cflags-scanner-extra=-marm"
+CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %endif
 
 %configure --datadir=/usr/local/libpostal/data --disable-data-download --enable-static --disable-shared $CONFEXTRA
