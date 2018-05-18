@@ -10,7 +10,7 @@ Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
-BuildRequires: snappy-devel, libtool
+BuildRequires: libtool
 
 %description
 A C library for parsing/normalizing street addresses around the world
@@ -69,5 +69,8 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm"
 %{_libdir}/pkgconfig/libpostal.pc
 
 %changelog
+* Fri May 18 2018 rinigus <rinigus.git@gmail.com> - 1.0.0-1
+- update to 1.0 libpostal
+
 * Wed Jan 18 2017 rinigus <rinigus.git@gmail.com> - 0.3.3-1
 - initial packaging release for SFOS
