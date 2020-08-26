@@ -37,7 +37,7 @@ This package provides libraries and headers for development
 
 %prep
 %if 0%{?on_suse_obs}
-%setup -q -n %{name}/libpostal -T -D
+%setup -q -n %_sourcedir/%{name}/libpostal -T -D
 %else
 %setup -q -n %{name}-%{version}/libpostal
 %endif
