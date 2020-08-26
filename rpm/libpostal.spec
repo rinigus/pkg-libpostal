@@ -16,7 +16,12 @@ License: MIT
 Group: Development/Libraries
 URL: https://github.com/openvenues/libpostal
 
+%if 0%{?on_suse_obs}
+Source: _service
+%else
 Source: %{name}-%{version}.tar.gz
+%endif
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
