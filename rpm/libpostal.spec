@@ -1,16 +1,7 @@
-%if 0%{?suse_version} >= 1500 || 0%{?fedora_version} >= 29 || 0%{?centos_version} >= 800
-%define on_suse_obs 1
-%endif
-
 Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
 Version: 0.3.4
-
-#%if 0%{?on_suse_obs}
-#Release: 1
-#%else
 Release: 1%{?dist}
-#%endif
 
 License: MIT
 Group: Development/Libraries
