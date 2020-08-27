@@ -1,3 +1,7 @@
+%if !0%{?on_suse_obs}
+%define static_build 1
+%endif
+
 Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
 Version: 0.3.4
@@ -52,8 +56,10 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %endif
 
 %configure --datadir=/usr/local/libpostal/data --disable-data-download \
-%if !0%{?on_suse_obs}
+%if 0%{?static_build}
            --enable-static --disable-shared
+%else
+           --disable-static --enable-shared
 %endif
            $CONFEXTRA
 
@@ -73,14 +79,14 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %files
 %defattr(-, root, root, 0755)
 %{_bindir}/libpostal_data
-%if 0%{?on_suse_obs}
+%if !0%{?static_build}
 %{_libdir}/libpostal*.so*
 %endif
 
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/libpostal
-%if !0%{?on_suse_obs}
+%if 0%{?static_build}
 %{_libdir}/libpostal.a
 %endif
 %{_libdir}/libpostal.la
