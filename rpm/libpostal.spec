@@ -25,7 +25,7 @@ A C library for parsing/normalizing street addresses around the world
 %package devel
 Summary: libpostal development headers and static library
 Group: Development/Libraries
-#Requires: %{name} = %{version}
+Requires: %{name} = %{version}
 
 %description devel
 A C library for parsing/normalizing street addresses around the world.
