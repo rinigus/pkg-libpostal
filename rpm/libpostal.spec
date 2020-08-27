@@ -8,7 +8,7 @@ Version: 0.3.4
 Release: 1%{?dist}
 
 License: MIT
-Group: Development/Libraries
+Group: Development/Libraries/Other
 URL: https://github.com/openvenues/libpostal
 
 %if 0%{?on_suse_obs}
@@ -21,14 +21,15 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
 BuildRequires: libtool
+BuildRequires: pkg-config
 
 %description
 A C library for parsing/normalizing street addresses around the world
 
 
 %package devel
-Summary: libpostal development headers and static library
-Group: Development/Libraries
+Summary: Libpostal development headers and static library
+Group: Development/Libraries/Other
 Requires: %{name} = %{version}
 
 %description devel
@@ -72,7 +73,9 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 
 %pre
 
-%post
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(-, root, root, 0755)
