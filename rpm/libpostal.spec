@@ -12,10 +12,11 @@ Group: Development/Libraries/Other
 URL: https://github.com/openvenues/libpostal
 
 %if 0%{?on_suse_obs}
-Source: _service
+Source0: _service
 %else
-Source: %{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.gz
 %endif
+Source1: libpostal-rpmlintrc
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -69,6 +70,9 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR=%{buildroot}
+
+%check
+%{__make} test || true
 
 %clean
 %{__rm} -rf %{buildroot}
