@@ -59,6 +59,8 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %configure --datadir=/usr/local/libpostal/data --disable-data-download \
 %if 0%{?static_only_build}
            --enable-static --disable-shared
+%else
+           --disable-static --enable-shared           
 %endif
            $CONFEXTRA
 
@@ -87,7 +89,9 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/libpostal
+%if 0%{?static_only_build}
 %{_libdir}/libpostal.a
+%endif
 %{_libdir}/libpostal.la
 %{_libdir}/pkgconfig/libpostal.pc
 
