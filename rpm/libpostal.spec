@@ -47,8 +47,10 @@ This package provides libraries and headers for development
 %build
 %{__make} clean || true
 
+%if !0%{?on_suse_obs}
 CFLAGS="$CFLAGS -fPIC -lstdc++"
 CXXFLAGS="$CXXFLAGS -fPIC"
+%endif
 ./bootstrap.sh
 
 CONFEXTRA=""
@@ -71,8 +73,8 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR=%{buildroot}
 
-%check
-%{__make} test || true
+#%check
+#%{__make} test || true
 
 %clean
 %{__rm} -rf %{buildroot}
