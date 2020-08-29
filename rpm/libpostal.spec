@@ -11,11 +11,7 @@ License: MIT
 Group: Development/Libraries/Other
 URL: https://github.com/openvenues/libpostal
 
-#%if 0%{?on_suse_obs}
-#Source0: _service
-#%else
 Source0: %{name}-%{version}.tar.xz
-#%endif
 Source1: libpostal-rpmlintrc
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -38,11 +34,6 @@ A C library for parsing/normalizing street addresses around the world.
 This package provides libraries and headers for development
 
 %prep
-# %if 0%{?on_suse_obs}
-# %setup -q -n %_sourcedir/%{name}/libpostal -T -D
-# %else
-# %setup -q -n %{name}-%{version}/libpostal
-# %endif
 %setup -q -n %{name}-%{version}/libpostal
 
 %build
@@ -71,9 +62,6 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR=%{buildroot}
-
-#%check
-#%{__make} test || true
 
 %clean
 %{__rm} -rf %{buildroot}
