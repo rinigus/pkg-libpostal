@@ -53,9 +53,9 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 
 %configure --datadir=/usr/local/libpostal/data --disable-data-download \
 %if 0%{?static_only_build}
-           --enable-static --disable-shared
+           --enable-static --disable-shared \
 %else
-           --disable-static --enable-shared
+           --disable-static --enable-shared \
 %endif
            $CONFEXTRA
 
