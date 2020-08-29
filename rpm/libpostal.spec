@@ -1,10 +1,10 @@
-%if !0%{?on_suse_obs}
+%if 0%{?sailfish_build}
 %define static_only_build 1
 %endif
 
 Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
-Version: 0.3.4
+Version: 1.0.0
 Release: 1%{?dist}
 
 License: MIT
