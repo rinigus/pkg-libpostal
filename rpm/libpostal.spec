@@ -48,10 +48,8 @@ This package provides libraries and headers for development
 %build
 %{__make} clean || true
 
-%if !0%{?on_suse_obs}
 CFLAGS="$CFLAGS -fPIC -lstdc++"
 CXXFLAGS="$CXXFLAGS -fPIC"
-%endif
 ./bootstrap.sh
 
 CONFEXTRA=""
@@ -64,7 +62,7 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %if 0%{?static_only_build}
            --enable-static --disable-shared
 %else
-           --disable-static --enable-shared           
+           --disable-static --enable-shared
 %endif
            $CONFEXTRA
 
