@@ -50,6 +50,9 @@ CONFEXTRA=""
 %ifarch armv7hl
 CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %endif
+%ifarch aarch64
+CONFEXTRA="--disable-sse2"
+%endif
 
 %configure --datadir=/usr/local/libpostal/data --disable-data-download \
 %if 0%{?static_only_build}
