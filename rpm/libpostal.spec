@@ -4,7 +4,7 @@
 
 Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
-Version: 1.0.0
+Version: 1.0.0+git1
 Release: 1%{?dist}
 
 License: MIT
