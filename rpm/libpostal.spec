@@ -1,25 +1,35 @@
+%if 0%{?sailfish_build}
+%define static_only_build 1
+%endif
+
 Summary:  A C library for parsing/normalizing street addresses
 Name: libpostal
-Version: 0.3.4
+Version: 1.0.0
 Release: 1%{?dist}
+
 License: MIT
-Group: Development/Libraries
+Group: Development/Libraries/Other
 URL: https://github.com/openvenues/libpostal
 
-Source: %{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.xz
+Source1: libpostal-rpmlintrc
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
 BuildRequires: libtool
+%if !0%{?sailfish_build}
+BuildRequires: pkg-config
+%endif
 
 %description
 A C library for parsing/normalizing street addresses around the world
 
 
 %package devel
-Summary: libpostal development headers and static library
-Group: Development/Libraries
-#Requires: %{name} = %{version}
+Summary: Libpostal development headers and static library
+Group: Development/Libraries/Other
+Requires: %{name} = %{version}
 
 %description devel
 A C library for parsing/normalizing street addresses around the world.
@@ -40,8 +50,17 @@ CONFEXTRA=""
 %ifarch armv7hl
 CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 %endif
+%ifarch aarch64
+CONFEXTRA="--disable-sse2"
+%endif
 
-%configure --datadir=/usr/local/libpostal/data --disable-data-download --enable-static --disable-shared $CONFEXTRA
+%configure --datadir=/usr/local/libpostal/data --disable-data-download \
+%if 0%{?static_only_build}
+           --enable-static --disable-shared \
+%else
+           --disable-static --enable-shared \
+%endif
+           $CONFEXTRA
 
 %{__make} %{?_smp_mflags}
 
@@ -54,17 +73,23 @@ CONFEXTRA="--with-cflags-scanner-extra=-marm --disable-sse2"
 
 %pre
 
-%post
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(-, root, root, 0755)
 %{_bindir}/libpostal_data
-#%{_libdir}/libpostal*.so*
+%if !0%{?static_only_build}
+%{_libdir}/libpostal*.so*
+%endif
 
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/libpostal
+%if 0%{?static_only_build}
 %{_libdir}/libpostal.a
+%endif
 %{_libdir}/libpostal.la
 %{_libdir}/pkgconfig/libpostal.pc
 
