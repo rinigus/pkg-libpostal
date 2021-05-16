@@ -18,9 +18,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
 BuildRequires: libtool
-%if !0%{?sailfish_build}
-BuildRequires: pkg-config
-%endif
+#%if !0%{?sailfish_build}
+#BuildRequires: pkg-config
+#%endif
 
 %description
 A C library for parsing/normalizing street addresses around the world
