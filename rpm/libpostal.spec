@@ -65,8 +65,8 @@ CONFEXTRA="--disable-sse2"
 %{__make} %{?_smp_mflags}
 
 %install
-%{__rm} -rf %{buildroot}
 %{__make} install DESTDIR=%{buildroot}
+%{__rm} -rf %{buildroot}%{_libdir}/libpostal.la ||:
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -81,16 +81,16 @@ CONFEXTRA="--disable-sse2"
 %defattr(-, root, root, 0755)
 %{_bindir}/libpostal_data
 %if !0%{?static_only_build}
-%{_libdir}/libpostal*.so*
+%{_libdir}/libpostal*.so.*
 %endif
 
 %files devel
 %defattr(-, root, root, 0755)
 %{_includedir}/libpostal
+%{_libdir}/libpostal*.so
 %if 0%{?static_only_build}
 %{_libdir}/libpostal.a
 %endif
-%{_libdir}/libpostal.la
 %{_libdir}/pkgconfig/libpostal.pc
 
 %changelog
