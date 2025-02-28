@@ -1,5 +1,6 @@
 %if 0%{?sailfish_build}
 %define static_only_build 1
+%define keepstatic 1
 %endif
 
 Summary:  A C library for parsing/normalizing street addresses
@@ -14,11 +15,9 @@ URL: https://github.com/openvenues/libpostal
 Source0: %{name}-%{version}.tar.xz
 Source1: libpostal-rpmlintrc
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-
 BuildRequires: gcc-c++
 BuildRequires: libtool
-#%if !0%{?sailfish_build}
+#%%if !0%%{?sailfish_build}
 #BuildRequires: pkg-config
 #%endif
 
@@ -62,30 +61,23 @@ CONFEXTRA="--disable-sse2"
 %endif
            $CONFEXTRA
 
-%{__make} %{?_smp_mflags}
+%{make_build}
 
 %install
-%{__make} install DESTDIR=%{buildroot}
+%{make_install}
 %{__rm} -rf %{buildroot}%{_libdir}/libpostal.la ||:
-
-%clean
-%{__rm} -rf %{buildroot}
-
-%pre
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-, root, root, 0755)
 %{_bindir}/libpostal_data
 %if !0%{?static_only_build}
 %{_libdir}/libpostal*.so.*
 %endif
 
 %files devel
-%defattr(-, root, root, 0755)
 %{_includedir}/libpostal
 %{_libdir}/libpostal*.so
 %if 0%{?static_only_build}
